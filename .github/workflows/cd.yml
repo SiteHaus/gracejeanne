@@ -35,6 +35,16 @@ jobs:
           pnpm install
           cd ..
 
+      - name: Type Check Api
+        run: |
+          cd api
+          npx tsc --noEmit
+
+      - name: Type Check Frontend
+        run: |
+          cd frontend
+          npx tsc --noEmit
+
       - name: Build Frontend
         run: |
           cd frontend
