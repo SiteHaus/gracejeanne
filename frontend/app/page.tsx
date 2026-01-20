@@ -41,7 +41,7 @@ export default function Home() {
               animationDelay: "0.2s",
             }}
           >
-            Grace Jeanne
+            Grace Jeanne Photography
           </div>
 
           <div
@@ -154,7 +154,7 @@ export default function Home() {
                           >
                             {day}
                           </div>
-                        )
+                        ),
                       )}
                     </div>
                     <div className="grid grid-cols-7 gap-2">
