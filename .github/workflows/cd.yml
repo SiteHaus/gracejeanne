@@ -59,7 +59,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VULTER_IP }}
-          username: deploy
+          username: root
           key: ${{ secrets.VULTER_SSH_KEY }}
           script: |
             set -euo pipefail
