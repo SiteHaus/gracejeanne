@@ -1,0 +1,7 @@
+gracejeanne.com, www.gracejeanne.com {
+    reverse_proxy frontend:3000
+}
+
+api.gracejeanne.com {
+    reverse_proxy backend:3001
+}
