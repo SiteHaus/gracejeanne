@@ -41,7 +41,7 @@ export default function Home() {
               animationDelay: "0.2s",
             }}
           >
-            Grace Jeanne Photography
+            Grace Jeanne
           </div>
 
           <div
