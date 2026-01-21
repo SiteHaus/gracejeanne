@@ -1,13 +1,13 @@
 services:
-  backend:
+  api:
     build:
-      context: ./backend
+      context: ./api
       dockerfile: Dockerfile
-    image: majdeq/gracejeanne-backend:latest
-    container_name: backend
+    image: majdeq/gracejeanne-api:latest
+    container_name: api
     restart: always
     env_file:
-      - ./backend/.env
+      - ./api/.env
     expose:
       - "3001"
 
@@ -37,7 +37,7 @@ services:
       - caddy_config:/config
     depends_on:
       - frontend
-      - backend
+      - api
 
 volumes:
   caddy_data:
