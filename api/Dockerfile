@@ -1,4 +1,4 @@
-# Create this file: /var/www/gracejeanne/api/Dockerfile
+# /var/www/gracejeanne/api/Dockerfile
 
 FROM node:20-alpine
 
@@ -16,11 +16,17 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the application
 COPY . .
 
-# Run migrations
-RUN pnpm migrate
+# Build the NestJS application
+RUN pnpm build
 
-# Expose the port
+# Create entrypoint script to run migrations then start
+RUN echo '#!/bin/sh' > /entrypoint.sh && \
+    echo 'echo "Running migrations..."' >> /entrypoint.sh && \
+    echo 'pnpm migrate' >> /entrypoint.sh && \
+    echo 'echo "Starting NestJS application..."' >> /entrypoint.sh && \
+    echo 'exec pnpm start:prod' >> /entrypoint.sh && \
+    chmod +x /entrypoint.sh
+
 EXPOSE 3001
 
-# Start the application
-CMD ["nest", "start"]
+ENTRYPOINT ["/entrypoint.sh"]
