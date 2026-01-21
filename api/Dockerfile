@@ -23,4 +23,4 @@ RUN pnpm migrate
 EXPOSE 3001
 
 # Start the application
-CMD ["pnpm", "start"]
+CMD ["nest", "start"]
