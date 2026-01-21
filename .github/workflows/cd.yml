@@ -58,9 +58,9 @@ jobs:
       - name: Deploy to Production
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VULTER_IP }}
+          host: ${{ secrets.VULTR_IP }}
           username: root
-          key: ${{ secrets.VULTER_SSH_KEY }}
+          key: ${{ secrets.VULTR_SSH_KEY }}
           script: |
             set -euo pipefail
 
