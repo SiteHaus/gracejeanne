@@ -68,11 +68,8 @@ jobs:
 
             git pull origin main
 
-            # Pull pre-built images
-            docker compose -f docker-compose.yml pull
-
             # Deploy
-            docker compose -f docker-compose.yml up -d --remove-orphans
+            docker compose -f docker-compose.yml up -d --build --remove-orphans
 
             # Cleanup
             docker image prune -f
