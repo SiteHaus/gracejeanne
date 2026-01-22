@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-
-import { pool } from './db.ts';
-import crypto from 'crypto';
+// db/migrate.ts
+import * as fs from 'fs';
+import * as path from 'path';
+import * as crypto from 'crypto';
+import { pool } from './db.js';
 interface Migration {
   name: string;
   checksum: string;
