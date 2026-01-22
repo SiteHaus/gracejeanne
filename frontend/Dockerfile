@@ -3,7 +3,7 @@
 FROM node:25-alpine3.22
 
 # Install pnpm
-RUN npm install -g pnpm
+RUN corepack enable
 
 WORKDIR /app
 
