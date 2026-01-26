@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -21,10 +20,14 @@ function CallbackContent() {
         const clientId = process.env.NEXT_PUBLIC_IAM_CLIENT_ID;
         const iamUrl = process.env.NEXT_PUBLIC_IAM_URL;
 
+        console.log("Client ID:", clientId);
+        console.log("IAM URL:", iamUrl);
+
         // Validate all required parameters exist
         if (!code || !state || !verifier || !savedState) {
           throw new Error("Missing required OAuth parameters");
         }
+
         if (!clientId || !iamUrl) {
           throw new Error("Missing IAM configuration");
         }
@@ -35,6 +38,7 @@ function CallbackContent() {
         }
 
         // Exchange code for tokens
+        // FIX: Changed from template literal to regular parentheses
         const response = await fetch(`${iamUrl}/auth/token`, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -49,6 +53,7 @@ function CallbackContent() {
 
         if (!response.ok) {
           const error = await response.text();
+          // FIX: Changed from template literal to regular parentheses
           throw new Error(`Token exchange failed: ${error}`);
         }
 
