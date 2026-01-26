@@ -24,8 +24,6 @@ export const Navbar = () => {
     { path: "/account", title: "Account", icon: <PersonStanding /> },
   ];
 
-  const handleAuth = async () => {};
-
   return (
     <>
       <div className="hidden absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/60 to-transparent h-32 text-white md:flex justify-end items-start pt-5 pr-4">
