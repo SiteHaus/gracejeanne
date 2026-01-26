@@ -17,7 +17,7 @@ export default function Home() {
         ></div>
 
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
 
         {/* Gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80"></div>
@@ -34,11 +34,12 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 text-center px-4">
           <div
-            className="font-serif text-7xl md:text-9xl mb-4 tracking-tight"
+            className="text-7xl md:text-9xl mb-4 tracking-tight"
             style={{
               animation: "fadeInUp 1.2s ease-out forwards",
               opacity: 0,
               animationDelay: "0.2s",
+              fontFamily: "'Alex Brush'",
             }}
           >
             Grace Jeanne

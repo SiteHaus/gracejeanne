@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { SiteHausAuthModule } from '@sitehaus/client-sdk/nestjs';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    SiteHausAuthModule.forRoot({
+      iamUrl: process.env.IAM_URL!,
+      clientKey: process.env.IAM_CLIENT_KEY!,
+      cacheTtlMs: 5000,
+    }),
+  ],
 })
 export class AppModule {}

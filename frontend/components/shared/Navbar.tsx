@@ -10,10 +10,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { login } from "@/lib/auth";
+import { Button } from "../ui/button";
 
 export const Navbar = () => {
   const links = [
@@ -23,6 +23,8 @@ export const Navbar = () => {
     { path: "/cart", title: "Cart", icon: <ShoppingCart /> },
     { path: "/account", title: "Account", icon: <PersonStanding /> },
   ];
+
+  const handleAuth = async () => {};
 
   return (
     <>
@@ -40,6 +42,9 @@ export const Navbar = () => {
               </span>
             </a>
           ))}
+          <Button onClick={login} className="hover:shadow-lg hover:scale-105">
+            Log In
+          </Button>
         </nav>
       </div>
       <div className="md:hidden absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/60 to-transparent h-24 text-white flex justify-end items-start px-3 pt-5">
