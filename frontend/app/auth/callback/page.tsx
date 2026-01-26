@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
+import { Suspense } from "react";
 
-export default function AuthCallback() {
+function CallbackContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -99,5 +101,22 @@ export default function AuthCallback() {
         <p className="text-gray-600">Please wait while we log you in.</p>
       </div>
     </div>
+  );
+}
+
+export default function CallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="flex flex-col items-center justify-center">
+            <Spinner className="size-6 text-primary" />
+            <p className="mt-4 text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      }
+    >
+      <CallbackContent />
+    </Suspense>
   );
 }
