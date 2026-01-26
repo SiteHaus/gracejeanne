@@ -17,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+        rel="stylesheet"
+        precedence="default"
+      />
       <body
         className={`${playfair.className} antialiased flex flex-col min-h-screen w-full bg-[url('/landing.jpg')] bg-cover bg-center bg-no-repeat`}
       >
