@@ -3,5 +3,5 @@ gracejeanne.com, www.gracejeanne.com {
 }
 
 api.gracejeanne.com {
-    reverse_proxy backend:3001
+    reverse_proxy api:3001
 }
