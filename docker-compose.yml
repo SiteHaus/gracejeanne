@@ -10,22 +10,20 @@ services:
       - ./api/.env
     expose:
       - "3000"
-
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_IAM_CLIENT_ID=${NEXT_PUBLIC_IAM_CLIENT_ID}
+        - NEXT_PUBLIC_IAM_URL=${NEXT_PUBLIC_IAM_URL}
     image: majdeq/gracejeanne-frontend:latest
     container_name: frontend
-    args:
-      - NEXT_PUBLIC_IAM_CLIENT_ID=${NEXT_PUBLIC_IAM_CLIENT_ID}
-      - NEXT_PUBLIC_IAM_URL=${NEXT_PUBLIC_IAM_URL}
     restart: always
     env_file:
       - ./frontend/.env
     expose:
       - "3000"
-
   caddy:
     image: caddy:latest
     container_name: caddy
@@ -33,7 +31,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "443:443/udp" # For HTTP/3
+      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -41,7 +39,6 @@ services:
     depends_on:
       - frontend
       - api
-
 volumes:
   caddy_data:
   caddy_config:
