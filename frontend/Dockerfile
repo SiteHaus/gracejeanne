@@ -16,8 +16,12 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the application
 COPY . .
 
-# Build the application
-RUN pnpm build
+ARG NEXT_PUBLIC_IAM_CLIENT_ID
+ARG NEXT_PUBLIC_IAM_URL
+ENV NEXT_PUBLIC_IAM_CLIENT_ID=$NEXT_PUBLIC_IAM_CLIENT_ID
+ENV NEXT_PUBLIC_IAM_URL=$NEXT_PUBLIC_IAM_URL
+
+RUN npm run build
 
 # Expose the port
 EXPOSE 3000

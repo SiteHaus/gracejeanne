@@ -17,6 +17,9 @@ services:
       dockerfile: Dockerfile
     image: majdeq/gracejeanne-frontend:latest
     container_name: frontend
+    args:
+      - NEXT_PUBLIC_IAM_CLIENT_ID=${NEXT_PUBLIC_IAM_CLIENT_ID}
+      - NEXT_PUBLIC_IAM_URL=${NEXT_PUBLIC_IAM_URL}
     restart: always
     env_file:
       - ./frontend/.env
