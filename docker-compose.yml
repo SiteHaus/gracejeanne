@@ -7,7 +7,7 @@ services:
     container_name: api
     restart: always
     env_file:
-      - /api/.env
+      - ./api/.env
     expose:
       - "3001"
 
@@ -19,7 +19,7 @@ services:
     container_name: frontend
     restart: always
     env_file:
-      - /frontend/.env
+      - ./frontend/.env
     expose:
       - "3000"
 
