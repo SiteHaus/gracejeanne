@@ -9,7 +9,7 @@ services:
     env_file:
       - ./api/.env
     expose:
-      - "3001"
+      - "3000"
 
   frontend:
     build:
