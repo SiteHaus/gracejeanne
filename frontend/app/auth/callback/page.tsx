@@ -108,8 +108,8 @@ export default function CallbackPage() {
       fallback={
         <div className="flex items-center justify-center min-h-screen">
           <div className="flex flex-col items-center justify-center">
-            <Spinner className="size-6 text-primary" />
-            <p className="mt-4 text-muted-foreground">Loading...</p>
+            <Spinner className="size-6 text-white" />
+            <p className="mt-4 text-white">Loading...</p>
           </div>
         </div>
       }
