@@ -104,8 +104,10 @@ function CallbackContent() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-2">Authenticating...</h1>
-        <p className="text-gray-600">Please wait while we log you in.</p>
+        <h1 className="text-2xl font-semibold text-gray-700 mb-4">
+          Authenticating...
+        </h1>
+        <p className="text-gray-600 mb-8">Please wait while we log you in.</p>
       </div>
     </div>
   );
