@@ -2,8 +2,10 @@
 import { Navbar } from "@/components/shared/Navbar";
 import { useEffect } from "react";
 import { fetchWithAuth } from "@/lib/api";
+import { useUser } from "@/stores/UserStore";
 
 export default function Home() {
+  const { user, setUser } = useUser();
   useEffect(() => {
     const fetch = async () => {
       const token = localStorage.getItem("access_token");
@@ -16,7 +18,7 @@ export default function Home() {
         const { user } = await fetchWithAuth(
           "https://api.sitehaus.dev/auth/me",
         ).then((r) => r.json());
-        console.log(user);
+        setUser(user);
       } catch (error) {
         console.error("Failed to fetch user:", error);
       }
@@ -24,6 +26,8 @@ export default function Home() {
 
     fetch();
   }, []);
+
+  console.log(user);
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
