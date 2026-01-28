@@ -90,6 +90,24 @@ export const Navbar = () => {
                 </a>
               </DropdownMenuItem>
             ))}
+            {token ? (
+              <div className="flex flex-col items-center gap-2">
+                <p>Welcome {user.firstName}</p>
+                <Button
+                  onClick={logout}
+                  className="hover:shadow-lg hover:scale-105"
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button
+                onClick={login}
+                className="hover:shadow-lg hover:scale-105"
+              >
+                Log In
+              </Button>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
