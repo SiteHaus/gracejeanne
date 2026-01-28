@@ -16,10 +16,6 @@ export async function login() {
   const clientId = process.env.NEXT_PUBLIC_IAM_CLIENT_ID;
   const iamUrl = process.env.NEXT_PUBLIC_IAM_URL;
 
-  // Add logging BEFORE the check
-  console.log("Client ID:", clientId);
-  console.log("IAM URL:", iamUrl);
-
   if (!clientId || !iamUrl) {
     console.error("Missing IAM configuration");
     alert("Missing IAM configuration - check console"); // Visual feedback

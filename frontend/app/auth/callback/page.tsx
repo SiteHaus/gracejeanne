@@ -20,8 +20,10 @@ function CallbackContent() {
         const clientId = process.env.NEXT_PUBLIC_IAM_CLIENT_ID;
         const iamUrl = process.env.NEXT_PUBLIC_IAM_URL;
 
-        console.log("Client ID:", clientId);
-        console.log("IAM URL:", iamUrl);
+        console.log(code);
+
+        console.log(searchParams);
+        console.log(state);
 
         // Validate all required parameters exist
         if (!code || !state || !verifier || !savedState) {
