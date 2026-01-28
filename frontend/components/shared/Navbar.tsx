@@ -50,7 +50,7 @@ export const Navbar = () => {
             </a>
           ))}
           {token ? (
-            <>
+            <div className="flex flex-col items-center gap-2">
               <p>Welcome {user.firstName}</p>
               <Button
                 onClick={logout}
@@ -58,7 +58,7 @@ export const Navbar = () => {
               >
                 Logout
               </Button>
-            </>
+            </div>
           ) : (
             <Button onClick={login} className="hover:shadow-lg hover:scale-105">
               Log In
