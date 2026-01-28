@@ -24,15 +24,10 @@ export default function Home() {
       }
     };
 
-<<<<<<< Updated upstream
-    fetch();
-  }, []);
-=======
     fetchUser();
   }, [setUser]);
 
   console.log(user);
->>>>>>> Stashed changes
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
