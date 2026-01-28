@@ -9,6 +9,7 @@ function CallbackContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true); // Add this
 
   useEffect(() => {
     async function handleCallback() {
@@ -20,27 +21,16 @@ function CallbackContent() {
         const clientId = process.env.NEXT_PUBLIC_IAM_CLIENT_ID;
         const iamUrl = process.env.NEXT_PUBLIC_IAM_URL;
 
-        console.log(code);
-
-        console.log(searchParams);
-        console.log(state);
-
-        // Validate all required parameters exist
         if (!code || !state || !verifier || !savedState) {
           throw new Error("Missing required OAuth parameters");
         }
-
         if (!clientId || !iamUrl) {
           throw new Error("Missing IAM configuration");
         }
-
-        // Validate state
         if (state !== savedState) {
           throw new Error("Invalid state parameter");
         }
 
-        // Exchange code for tokens
-        // FIX: Changed from template literal to regular parentheses
         const response = await fetch(`${iamUrl}/auth/token`, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -55,32 +45,40 @@ function CallbackContent() {
 
         if (!response.ok) {
           const error = await response.text();
-          // FIX: Changed from template literal to regular parentheses
           throw new Error(`Token exchange failed: ${error}`);
         }
 
         const tokens = await response.json();
-
-        // Store tokens (use httpOnly cookies for production!)
         localStorage.setItem("access_token", tokens.access_token);
         localStorage.setItem(
           "token_expires",
           String(Date.now() + tokens.expires_in * 1000),
         );
 
-        // Cleanup
         sessionStorage.removeItem("pkce_verifier");
         sessionStorage.removeItem("oauth_state");
 
-        // Redirect to app
         router.push("/");
       } catch (err) {
         setError(err instanceof Error ? err.message : "Authentication failed");
+      } finally {
+        setLoading(false); // Add this
       }
     }
 
     handleCallback();
   }, [searchParams, router]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <Spinner className="size-6 text-primary" />
+          <p className="mt-4 text-muted-foreground">Authenticating...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -101,16 +99,7 @@ function CallbackContent() {
     );
   }
 
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-3xl font-semibold text-white mb-4">
-          Authenticating...
-        </h1>
-        <p className="text-white mb-8">Please wait while we log you in.</p>
-      </div>
-    </div>
-  );
+  return null; // Component will redirect before showing this
 }
 
 export default function CallbackPage() {
