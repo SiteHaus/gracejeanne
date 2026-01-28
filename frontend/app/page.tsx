@@ -1,7 +1,29 @@
 "use client";
 import { Navbar } from "@/components/shared/Navbar";
+import { useEffect } from "react";
+import { fetchWithAuth } from "@/lib/api";
 
 export default function Home() {
+  useEffect(() => {
+    const fetch = async () => {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        console.log("No token found");
+        return; // Don't fetch if no token
+      }
+
+      try {
+        const { user } = await fetchWithAuth(
+          "https://api.sitehaus.dev/auth/me",
+        ).then((r) => r.json());
+        console.log(user);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      }
+    };
+
+    fetch();
+  }, []);
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
