@@ -16,8 +16,10 @@ import { login } from "@/lib/auth";
 import { logout } from "@/lib/auth";
 import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
+import { useUser } from "@/stores/UserStore";
 
 export const Navbar = () => {
+  const { user } = useUser();
   const links = [
     { path: "/", title: "Home", icon: <Home /> },
     { path: "/about", title: "About", icon: <Book /> },
@@ -48,12 +50,15 @@ export const Navbar = () => {
             </a>
           ))}
           {token ? (
-            <Button
-              onClick={logout}
-              className="hover:shadow-lg hover:scale-105"
-            >
-              Logout
-            </Button>
+            <>
+              <p>Welcome {user.firstName}</p>
+              <Button
+                onClick={logout}
+                className="hover:shadow-lg hover:scale-105"
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <Button onClick={login} className="hover:shadow-lg hover:scale-105">
               Log In
