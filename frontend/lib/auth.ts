@@ -40,3 +40,18 @@ export async function login() {
 
   window.location.href = `${iamUrl}/auth/authorize?${params}`;
 }
+
+export async function logout() {
+  const token = localStorage.getItem("access_token");
+
+  // Optionally notify IAM to revoke session
+  await fetch(`${process.env.NEXT_PUBLIC_IAM_URL}/auth/logout`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    credentials: "include",
+  });
+
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("token_expires");
+  window.location.href = "/";
+}

@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { login } from "@/lib/auth";
+import { logout } from "@/lib/auth";
 import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 
@@ -46,7 +47,12 @@ export const Navbar = () => {
               </span>
             </a>
           ))}
-          {!token && (
+          {token ? (
+            <Button
+              onClick={logout}
+              className="hover:shadow-lg hover:scale-105"
+            ></Button>
+          ) : (
             <Button onClick={login} className="hover:shadow-lg hover:scale-105">
               Log In
             </Button>
