@@ -51,7 +51,9 @@ export const Navbar = () => {
             <Button
               onClick={logout}
               className="hover:shadow-lg hover:scale-105"
-            ></Button>
+            >
+              Logout
+            </Button>
           ) : (
             <Button onClick={login} className="hover:shadow-lg hover:scale-105">
               Log In
