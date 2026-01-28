@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { login } from "@/lib/auth";
 import { Button } from "../ui/button";
+import { useState, useEffect } from "react";
 
 export const Navbar = () => {
   const links = [
@@ -24,7 +25,10 @@ export const Navbar = () => {
     { path: "/account", title: "Account", icon: <PersonStanding /> },
   ];
 
-  const token = localStorage.getItem("access_token");
+  const [token, setToken] = useState<string | null>(null);
+  useEffect(() => {
+    setToken(localStorage.getItem("access_token"));
+  }, []);
 
   return (
     <>
