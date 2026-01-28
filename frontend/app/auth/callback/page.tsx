@@ -73,8 +73,8 @@ function CallbackContent() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="flex flex-col items-center justify-center">
-          <Spinner className="size-6 text-primary" />
-          <p className="mt-4 text-muted-foreground">Authenticating...</p>
+          <Spinner className="size-6 text-white" />
+          <p className="mt-4 text-white">Authenticating...</p>
         </div>
       </div>
     );
@@ -104,16 +104,7 @@ function CallbackContent() {
 
 export default function CallbackPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="flex flex-col items-center justify-center">
-            <Spinner className="size-6 text-white" />
-            <p className="mt-4 text-white">Loading...</p>
-          </div>
-        </div>
-      }
-    >
+    <Suspense>
       <CallbackContent />
     </Suspense>
   );
