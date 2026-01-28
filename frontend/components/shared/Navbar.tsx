@@ -25,7 +25,11 @@ export const Navbar = () => {
     { path: "/about", title: "About", icon: <Book /> },
     { path: "/newsletter", title: "Newsletter", icon: <Newspaper /> },
     { path: "/cart", title: "Cart", icon: <ShoppingCart /> },
-    { path: "/account", title: "Account", icon: <PersonStanding /> },
+    {
+      path: "https://iam.sitehaus.dev/account",
+      title: "Account",
+      icon: <PersonStanding />,
+    },
   ];
 
   const [token, setToken] = useState<string | null>(null);
