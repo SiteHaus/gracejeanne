@@ -5,11 +5,11 @@ import { fetchWithAuth } from "@/lib/api";
 
 export default function Home() {
   useEffect(() => {
-    const fetch = async () => {
+    const fetchUser = async () => {
       const token = localStorage.getItem("access_token");
       if (!token) {
         console.log("No token found");
-        return; // Don't fetch if no token
+        return;
       }
 
       try {
@@ -22,8 +22,15 @@ export default function Home() {
       }
     };
 
+<<<<<<< Updated upstream
     fetch();
   }, []);
+=======
+    fetchUser();
+  }, [setUser]);
+
+  console.log(user);
+>>>>>>> Stashed changes
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
