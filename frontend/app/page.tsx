@@ -5,7 +5,7 @@ import { fetchWithAuth } from "@/lib/api";
 import { useUser } from "@/stores/UserStore";
 
 export default function Home() {
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("access_token");
@@ -27,7 +27,6 @@ export default function Home() {
     fetchUser();
   }, [setUser]);
 
-  console.log(user);
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <Navbar />
