@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { client } from '../db/db.js'; // Use relative path and pool
+import { pool } from '../db/db.js'; // Use relative path and pool
 import { Public } from '@sitehaus/client-sdk/nestjs';
 
 export interface Post {
@@ -7,6 +7,8 @@ export interface Post {
   title: string;
   content: string;
 }
+
+const client = await pool.connect();
 
 @Injectable()
 @Public()

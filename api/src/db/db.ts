@@ -7,6 +7,3 @@ export const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
-
-const client = await pool.connect();
-export { client };
