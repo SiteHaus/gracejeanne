@@ -11,7 +11,6 @@ export interface Post {
 const client = await pool.connect();
 
 @Injectable()
-@Public()
 export class PostsService {
   async getPosts(): Promise<Post[]> {
     const result = await client.query('SELECT * FROM posts');
