@@ -24,7 +24,7 @@ export default function Newsletter() {
     try {
       setLoading(true);
       const response = await fetchWithAuth(
-        `https://api.gracejeanne.com/posts/getPosts`,
+        `${process.env.ORIGIN_URL}/posts/getPosts`,
       );
 
       if (!response.ok) {
