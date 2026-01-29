@@ -1,9 +1,6 @@
 # /var/www/gracejeanne/api/Dockerfile
-
 FROM node:20-alpine
-
 WORKDIR /app
-
 RUN npm install -g pnpm
 
 # Copy package files
@@ -23,9 +20,8 @@ RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo 'echo "Running migrations..."' >> /entrypoint.sh && \
     echo 'pnpm migrate' >> /entrypoint.sh && \
     echo 'echo "Starting NestJS application..."' >> /entrypoint.sh && \
-    echo 'exec pnpm start:prod' >> /entrypoint.sh && \
+    echo 'exec node dist/main.js' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
 EXPOSE 3001
-
 ENTRYPOINT ["/entrypoint.sh"]
