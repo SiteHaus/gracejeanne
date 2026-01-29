@@ -16,7 +16,7 @@ export default function Home() {
 
       try {
         const { user } = await fetchWithAuth(
-          "https://api.sitehaus.dev/auth/me",
+          `${process.env.NEXT_PUBLIC_IAM_URL}/auth/me`,
         ).then((r) => r.json());
         setUser(user);
       } catch (error) {
