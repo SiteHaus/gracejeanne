@@ -18,6 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "allowImportingTsExtensions": false, // Change to false
+    "noEmit": false // Change to false (or remove this line)
   }
 }

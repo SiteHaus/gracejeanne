@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SiteHausAuthModule } from '@sitehaus/client-sdk/nestjs';
+import { PostsModule } from './posts/posts.module.js';
 
 @Module({
   imports: [
@@ -8,6 +9,7 @@ import { SiteHausAuthModule } from '@sitehaus/client-sdk/nestjs';
       clientKey: process.env.IAM_CLIENT_KEY!,
       cacheTtlMs: 5000,
     }),
+    PostsModule,
   ],
 })
 export class AppModule {}
