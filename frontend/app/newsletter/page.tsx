@@ -24,7 +24,7 @@ export default function Newsletter() {
     try {
       setLoading(true);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/posts/getPosts`,
+        `https://api.gracejeanne.com/posts/getPosts`,
       );
 
       if (!response.ok) {
