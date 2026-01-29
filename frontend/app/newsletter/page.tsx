@@ -23,7 +23,7 @@ export default function Newsletter() {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const response = await fetchWithAuth(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/posts/getPosts`,
       );
 
