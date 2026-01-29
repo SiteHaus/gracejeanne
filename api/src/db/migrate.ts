@@ -41,7 +41,7 @@ async function runMigrations() {
     console.log(appliedMap);
 
     // Find migrations directory
-    const migrationsDir = path.join(path.resolve(), 'db', 'migrations');
+    const migrationsDir = path.join(path.resolve(), 'src', 'db', 'migrations');
 
     if (!fs.existsSync(migrationsDir)) {
       console.error('✗ Migrations directory not found at:', migrationsDir);
