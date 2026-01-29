@@ -24,7 +24,7 @@ export default function Newsletter() {
     try {
       setLoading(true);
       const response = await fetchWithAuth(
-        "http://localhost:3001/posts/getPosts",
+        `${process.env.NEXT_PUBLIC_API_URL}/posts/getPosts`,
       );
 
       if (!response.ok) {
