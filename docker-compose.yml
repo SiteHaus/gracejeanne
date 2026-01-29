@@ -17,6 +17,7 @@ services:
       args:
         - NEXT_PUBLIC_IAM_CLIENT_ID=${NEXT_PUBLIC_IAM_CLIENT_ID}
         - NEXT_PUBLIC_IAM_URL=${NEXT_PUBLIC_IAM_URL}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     image: majdeq/gracejeanne-frontend:latest
     container_name: frontend
     restart: always
