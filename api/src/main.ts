@@ -8,6 +8,9 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
+  console.log(
+    `Application is running on: ${process.env.CURRENT_URL}:${process.env.PORT}`,
+  );
 }
 bootstrap();
