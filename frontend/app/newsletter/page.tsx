@@ -23,7 +23,7 @@ export default function Newsletter() {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
+      const response = await fetchWithAuth(
         `https://api.gracejeanne.com/posts/getPosts`,
       );
 
