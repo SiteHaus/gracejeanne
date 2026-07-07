@@ -1,11 +1,4 @@
-import {
-  Home,
-  Newspaper,
-  ShoppingCart,
-  PersonStanding,
-  Menu,
-  Book,
-} from "lucide-react";
+import { Home, ShoppingCart, PersonStanding, Menu, Book } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,7 +16,6 @@ export const Navbar = () => {
   const links = [
     { path: "/", title: "Home", icon: <Home /> },
     { path: "/about", title: "About", icon: <Book /> },
-    { path: "/newsletter", title: "Newsletter", icon: <Newspaper /> },
     { path: "/cart", title: "Cart", icon: <ShoppingCart /> },
     {
       path: "https://iam.sitehaus.dev/account",
