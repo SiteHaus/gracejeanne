@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./frontend
+      context: .
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_IAM_CLIENT_ID=${NEXT_PUBLIC_IAM_CLIENT_ID}
@@ -11,7 +11,7 @@ services:
     container_name: frontend
     restart: always
     env_file:
-      - ./frontend/.env
+      - .env
     expose:
       - "3000"
   caddy:
