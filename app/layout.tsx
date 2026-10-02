@@ -69,6 +69,7 @@ export const metadata: Metadata = {
 const mainLinks: NavbarLinkType[] = [
   { name: "Home", target: "/" },
   { name: "About Us", target: "/about" },
+  { name: "Galleries", target: "/galleries" },
   { name: "Shop", target: "/shop" },
   { name: "Contact", target: "/contact" },
 ];

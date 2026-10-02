@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import type { Product, PublicVariant, Cart, CartItem } from "@/lib/ecom/types";
+import type { GalleryTag } from "@/lib/ecom/galleries";
 import {
   getCart,
   addToCart as apiAddToCart,
@@ -243,9 +244,11 @@ function CartDrawer({
 
 function ProductCard({
   product,
+  galleries,
   onAdd,
 }: {
   product: Product;
+  galleries: GalleryTag[];
   onAdd: (variantId: string) => Promise<void>;
 }) {
   const [state, setState] = useState<"idle" | "adding" | "added" | "error">(
@@ -297,6 +300,18 @@ function ProductCard({
         </div>
 
         <div className="p-5 pb-3 flex flex-col gap-1">
+          {galleries.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-1">
+              {galleries.map((g) => (
+                <span
+                  key={g.slug}
+                  className="text-[11px] font-semibold uppercase tracking-wide text-primary bg-primary/10 px-2.5 py-0.5 rounded-full"
+                >
+                  {g.name}
+                </span>
+              ))}
+            </div>
+          )}
           <h3 className="text-base font-bold text-gray-900 leading-snug">
             {product.name}
           </h3>
@@ -362,7 +377,13 @@ function ProductCard({
 
 // ─── Main Client Component ────────────────────────────────────────────────────
 
-export default function ShopClient({ products }: { products: Product[] }) {
+export default function ShopClient({
+  products,
+  galleriesByProduct = {},
+}: {
+  products: Product[];
+  galleriesByProduct?: Record<string, GalleryTag[]>;
+}) {
   const [cart, setCart] = useState<Cart>(emptyCart);
   const [cartOpen, setCartOpen] = useState(false);
   const [sortBy, setSortBy] = useState("featured");
@@ -534,6 +555,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
                 <ProductCard
                   key={product.id}
                   product={product}
+                  galleries={galleriesByProduct[product.id] ?? []}
                   onAdd={addToCart}
                 />
               ))}

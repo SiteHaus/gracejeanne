@@ -2,6 +2,8 @@ import type {
   Cart,
   CheckoutIntentRequest,
   CheckoutIntentResponse,
+  CollectionDetail,
+  CollectionList,
   Order,
   ProductDetail,
   ProductList,
@@ -65,6 +67,21 @@ export async function getProduct(id: string): Promise<ProductDetail> {
   return ecomFetch<ProductDetail>(`/v1/catalog/products/${id}`, {
     next: { revalidate: 60 },
   });
+}
+
+// ─── Collections ──────────────────────────────────────────────────────────────
+
+export async function getCollections(): Promise<CollectionList> {
+  return ecomFetch<CollectionList>("/v1/catalog/collections", {
+    next: { revalidate: 60 },
+  });
+}
+
+export async function getCollection(slug: string): Promise<CollectionDetail> {
+  return ecomFetch<CollectionDetail>(
+    `/v1/catalog/collections/${encodeURIComponent(slug)}`,
+    { next: { revalidate: 60 } },
+  );
 }
 
 // ─── Cart ─────────────────────────────────────────────────────────────────────

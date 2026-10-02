@@ -64,6 +64,41 @@ export type ProductList = {
   total: number;
 };
 
+// ─── Collections (public storefront) ─────────────────────────────────────────
+
+export type CollectionSummary = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  productCount: number;
+  sellAsWhole: boolean;
+  priceCents: number | null;
+  coverImageUrl: string | null;
+};
+
+export type CollectionList = {
+  collections: CollectionSummary[];
+};
+
+export type CollectionProduct = {
+  id: string;
+  name: string;
+  description: string | null;
+  primaryImage: ProductImage;
+};
+
+export type CollectionDetail = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  sellAsWhole: boolean;
+  priceCents: number | null;
+  products: CollectionProduct[];
+  total: number;
+};
+
 export type CartItem = {
   variantId: string;
   productId: string;

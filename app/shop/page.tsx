@@ -1,4 +1,5 @@
 import { getProducts } from "@/lib/ecom/client";
+import { getGalleriesByProduct } from "@/lib/ecom/galleries";
 import ShopClient from "./ShopClient";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +11,12 @@ export const metadata = {
 };
 
 export default async function ShopPage() {
-  const { items } = await getProducts({ limit: 100 });
+  const [{ items }, galleriesByProduct] = await Promise.all([
+    getProducts({ limit: 100 }),
+    getGalleriesByProduct(),
+  ]);
 
-  return <ShopClient products={items} />;
+  return (
+    <ShopClient products={items} galleriesByProduct={galleriesByProduct} />
+  );
 }
