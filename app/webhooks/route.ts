@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Receives webhooks from the SiteHaus commerce dashboard.
- * Register https://<your-domain>/api/webhooks under Commerce → Webhooks,
+ * Register https://<your-domain>/webhooks under Commerce → Webhooks,
  * then set SITEHAUS_WEBHOOK_SECRET to the signing secret it shows you.
  */
 export async function POST(request: Request) {
