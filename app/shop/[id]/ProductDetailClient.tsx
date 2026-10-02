@@ -87,16 +87,16 @@ function CartDrawer({
         className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
       <div
-        className={`fixed top-0 right-0 h-full w-full max-w-sm bg-white z-50 shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-full w-full max-w-sm bg-surface z-50 shadow-2xl border-l border-border flex flex-col transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
           <div>
             <div className="w-6 h-0.5 bg-primary rounded-full mb-1" />
-            <h2 className="text-lg font-bold text-gray-900">Your Cart</h2>
+            <h2 className="text-xl">Your Cart</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 transition-colors"
+            className="text-muted-foreground hover:text-white transition-colors"
           >
             <X size={20} />
           </button>
@@ -105,8 +105,8 @@ function CartDrawer({
         <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-4">
           {cart.items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
-              <ShoppingCart size={40} className="text-gray-200" />
-              <p className="text-gray-400 text-sm">Your cart is empty.</p>
+              <ShoppingCart size={40} className="text-white/25" />
+              <p className="text-muted-foreground text-sm">Your cart is empty.</p>
               <button
                 onClick={onClose}
                 className="text-primary text-sm font-semibold hover:underline"
@@ -120,7 +120,7 @@ function CartDrawer({
               return (
                 <div
                   key={item.variantId}
-                  className="flex gap-4 items-start border-b border-gray-50 pb-4"
+                  className="flex gap-4 items-start border-b border-border pb-4"
                 >
                   {item.primaryImageUrl ? (
                     <Image
@@ -128,16 +128,16 @@ function CartDrawer({
                       alt={item.productName}
                       width={64}
                       height={64}
-                      className="w-16 h-16 rounded-xl object-cover border border-gray-100 flex-shrink-0"
+                      className="w-16 h-16 rounded-sm object-cover border border-border flex-shrink-0"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-xl bg-gray-100 flex-shrink-0" />
+                    <div className="w-16 h-16 rounded-sm bg-muted flex-shrink-0" />
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 leading-tight">
+                    <p className="text-sm font-semibold text-foreground leading-tight">
                       {item.productName}
                     </p>
-                    <p className="text-xs text-gray-400 mb-2">
+                    <p className="text-xs text-muted-foreground mb-2">
                       {formatPrice(item.priceCents)} each
                     </p>
                     <div className="flex items-center gap-2">
@@ -146,11 +146,11 @@ function CartDrawer({
                           handleUpdateQty(item.variantId, item.quantity - 1)
                         }
                         disabled={isBusy}
-                        className="w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors disabled:opacity-40"
+                        className="w-6 h-6 rounded-full border border-white/15 flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors disabled:opacity-40"
                       >
                         <Minus size={10} />
                       </button>
-                      <span className="text-sm font-medium text-gray-800 w-4 text-center">
+                      <span className="text-sm font-medium text-foreground w-4 text-center">
                         {isBusy ? (
                           <Loader2 size={12} className="animate-spin mx-auto" />
                         ) : (
@@ -162,20 +162,20 @@ function CartDrawer({
                           handleUpdateQty(item.variantId, item.quantity + 1)
                         }
                         disabled={isBusy}
-                        className="w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors disabled:opacity-40"
+                        className="w-6 h-6 rounded-full border border-white/15 flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors disabled:opacity-40"
                       >
                         <Plus size={10} />
                       </button>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <p className="text-sm font-bold text-gray-800">
+                    <p className="text-sm font-bold text-foreground">
                       {formatPrice(item.lineTotalCents)}
                     </p>
                     <button
                       onClick={() => handleRemove(item.variantId)}
                       disabled={isBusy}
-                      className="text-gray-300 hover:text-red-400 transition-colors disabled:opacity-40"
+                      className="text-white/25 hover:text-red-400 transition-colors disabled:opacity-40"
                     >
                       {isBusy ? (
                         <Loader2 size={14} className="animate-spin" />
@@ -191,20 +191,20 @@ function CartDrawer({
         </div>
 
         {cart.items.length > 0 && (
-          <div className="px-6 py-5 border-t border-gray-100 flex flex-col gap-4">
+          <div className="px-6 py-5 border-t border-border flex flex-col gap-4">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-500">Subtotal</span>
-              <span className="text-lg font-bold text-gray-900">
+              <span className="text-sm text-muted-foreground">Subtotal</span>
+              <span className="text-lg font-bold text-white">
                 {formatPrice(cart.subtotalCents)}
               </span>
             </div>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted-foreground">
               Shipping and taxes calculated at checkout.
             </p>
             <button
               onClick={onCheckout}
               disabled={checkingOut}
-              className="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-60 flex items-center justify-center gap-2"
+              className="w-full bg-primary text-primary-foreground text-xs uppercase tracking-[0.22em] font-medium py-3.5 rounded-sm hover:brightness-110 transition-opacity disabled:opacity-60 flex items-center justify-center gap-2"
             >
               {checkingOut ? (
                 <>
@@ -215,13 +215,13 @@ function CartDrawer({
               )}
             </button>
             {checkoutError && (
-              <p className="text-xs text-red-500 text-center -mt-2">
+              <p className="text-xs text-destructive text-center -mt-2">
                 {checkoutError}
               </p>
             )}
             <button
               onClick={onClose}
-              className="w-full text-center text-sm text-gray-400 hover:text-gray-600 transition-colors"
+              className="w-full text-center text-sm text-muted-foreground hover:text-white transition-colors"
             >
               Continue Shopping
             </button>
@@ -372,23 +372,23 @@ export default function ProductDetailClient({
       />
 
       {/* ── Nav bar ── */}
-      <section className="bg-hero-bg px-6 py-5">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
+      <section className="px-6 pt-8 pb-2">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link
             href="/shop"
-            className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
           >
-            <ChevronLeft size={16} />
+            <ChevronLeft size={14} strokeWidth={1.5} />
             Back to Shop
           </Link>
           <button
             onClick={() => setCartOpen(true)}
-            className="relative flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-background font-semibold px-4 py-2 rounded-xl transition-colors text-sm"
+            className="relative flex items-center gap-2 border border-white/15 hover:border-white/40 text-muted-foreground hover:text-white text-xs uppercase tracking-[0.18em] px-3 py-2 rounded-sm transition-colors"
           >
             <ShoppingCart size={16} />
             <span className="hidden sm:inline">Cart</span>
             {cart.itemCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
                 {cart.itemCount}
               </span>
             )}
@@ -397,24 +397,26 @@ export default function ProductDetailClient({
       </section>
 
       {/* ── Product Detail ── */}
-      <section className="bg-gray-50 px-6 py-12">
-        <div className="max-w-5xl mx-auto">
+      <section className="px-6 pt-8 pb-24">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Images */}
             <div className="flex flex-col gap-3">
-              <div className="relative aspect-square rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm">
+              {/* Natural aspect ratio: show the whole print, uncropped */}
+              <div className="relative">
                 {product.images[selectedImage] ? (
                   <Image
                     src={product.images[selectedImage].cdnUrl}
                     alt={product.images[selectedImage].altText ?? product.name}
-                    fill
-                    className="object-cover"
+                    width={1600}
+                    height={1200}
+                    className="w-full h-auto max-h-[75vh] object-contain object-left-top shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
                 ) : (
-                  <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-300 text-sm">No image</span>
+                  <div className="w-full aspect-[4/3] bg-muted flex items-center justify-center">
+                    <span className="text-white/25 text-sm">No image</span>
                   </div>
                 )}
               </div>
@@ -425,7 +427,7 @@ export default function ProductDetailClient({
                     <button
                       key={i}
                       onClick={() => setSelectedImage(i)}
-                      className={`relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-colors ${
+                      className={`relative w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border-2 transition-colors ${
                         selectedImage === i
                           ? "border-primary"
                           : "border-transparent"
@@ -448,17 +450,17 @@ export default function ProductDetailClient({
             <div className="flex flex-col gap-6">
               <div>
                 {product.brand && (
-                  <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1">
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">
                     {product.brand}
                   </p>
                 )}
-                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl md:text-4xl leading-tight">
                   {product.name}
                 </h1>
               </div>
 
               {product.description && (
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-foreground/80 leading-relaxed">
                   {product.description}
                 </p>
               )}
@@ -474,10 +476,10 @@ export default function ProductDetailClient({
                     );
                     return (
                       <div key={opt.id}>
-                        <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">
                           {opt.name}
                           {selected[opt.id] && (
-                            <span className="ml-2 normal-case text-gray-400 font-normal">
+                            <span className="ml-2 normal-case text-muted-foreground font-normal">
                               {
                                 opt.values.find(
                                   (v) => v.id === selected[opt.id],
@@ -500,12 +502,12 @@ export default function ProductDetailClient({
                                   }))
                                 }
                                 disabled={!isAvailable}
-                                className={`px-4 py-2 rounded-lg text-sm font-semibold border-2 transition-all ${
+                                className={`px-4 py-2 rounded-sm text-sm border transition-all ${
                                   isSelected
-                                    ? "border-primary bg-primary text-white"
+                                    ? "border-primary bg-primary text-primary-foreground"
                                     : isAvailable
-                                      ? "border-gray-200 bg-white text-gray-700 hover:border-primary hover:text-primary"
-                                      : "border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed line-through"
+                                      ? "border-white/15 bg-card text-foreground hover:border-primary hover:text-primary"
+                                      : "border-border bg-background text-white/25 cursor-not-allowed line-through"
                                 }`}
                               >
                                 {val.value}
@@ -524,34 +526,34 @@ export default function ProductDetailClient({
                 {selectedVariant ? (
                   <>
                     <div className="flex items-baseline gap-3">
-                      <span className="text-3xl font-bold text-gray-900">
+                      <span className="text-2xl font-light text-white">
                         {formatPrice(selectedVariant.priceCents)}
                       </span>
                       {selectedVariant.compareAtCents &&
                         selectedVariant.compareAtCents >
                           selectedVariant.priceCents && (
-                          <span className="text-base text-gray-400 line-through">
+                          <span className="text-base text-muted-foreground line-through">
                             {formatPrice(selectedVariant.compareAtCents)}
                           </span>
                         )}
                     </div>
                     {selectedVariant.availability === "low_stock" && (
-                      <p className="text-xs font-semibold text-amber-600">
+                      <p className="text-xs font-semibold text-primary">
                         Low stock — order soon
                       </p>
                     )}
                     {selectedVariant.availability === "out_of_stock" && (
-                      <p className="text-xs font-semibold text-red-500">
+                      <p className="text-xs font-semibold text-destructive">
                         Out of stock
                       </p>
                     )}
                   </>
                 ) : noVariantSelected ? (
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-muted-foreground">
                     Select options above
                   </span>
                 ) : (
-                  <span className="text-sm text-gray-400">—</span>
+                  <span className="text-sm text-muted-foreground">—</span>
                 )}
               </div>
 
@@ -561,16 +563,16 @@ export default function ProductDetailClient({
                 disabled={
                   !selectedVariant || outOfStock || addState === "adding"
                 }
-                className={`w-full py-4 rounded-xl text-base font-bold transition-all duration-200 flex items-center justify-center gap-2 ${
+                className={`w-full py-4 rounded-sm text-xs uppercase tracking-[0.22em] font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
                   outOfStock || noVariantSelected
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
                     : addState === "adding"
-                      ? "bg-primary/70 text-white cursor-wait"
+                      ? "bg-primary/70 text-primary-foreground cursor-wait"
                       : addState === "added"
                         ? "bg-green-500 text-white"
                         : addState === "error"
                           ? "bg-red-500 text-white"
-                          : "bg-primary text-white hover:opacity-90"
+                          : "bg-primary text-primary-foreground hover:brightness-110"
                 }`}
               >
                 {addState === "adding" && (
@@ -599,13 +601,16 @@ export default function ProductDetailClient({
               )}
 
               {/* Trust signals */}
-              <div className="border-t border-gray-100 pt-4 flex flex-col gap-1.5 text-xs text-gray-400">
-                <p>Authentic photographs — take onsite by Grace Jeanne.</p>
+              <div className="border-t border-border pt-4 flex flex-col gap-1.5 text-xs text-muted-foreground">
+                <p>Original photograph, taken on location by Grace Jeanne.</p>
                 <p>
-                  Questions? Call us:{" "}
-                  <span className="font-semibold text-gray-500">
-                    (435) 668-3468
-                  </span>
+                  Questions about sizes or finishes?{" "}
+                  <Link
+                    href="/contact"
+                    className="text-primary hover:text-white transition-colors"
+                  >
+                    Get in touch
+                  </Link>
                 </p>
               </div>
             </div>

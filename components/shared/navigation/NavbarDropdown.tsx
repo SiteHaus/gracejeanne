@@ -2,41 +2,45 @@
 
 import { NavbarLinkType } from "./NavbarLink";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
+import { isActive } from "./NavbarLinkList";
 
 export const NavbarDropdown = ({ links }: { links: NavbarLinkType[] }) => {
+  const pathname = usePathname();
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Menu size={28} className="text-white cursor-pointer" />
+      <DropdownMenuTrigger
+        aria-label="Open menu"
+        className="text-white/85 hover:text-white transition-colors"
+      >
+        <Menu size={26} strokeWidth={1.5} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-navbar border-border w-64">
+      <DropdownMenuContent
+        align="end"
+        className="bg-surface border-border w-60 py-2"
+      >
         {links.map((link) => (
           <DropdownMenuItem key={link.target} asChild>
             <Link
               href={link.target}
-              className="text-white text-base font-medium hover:text-white cursor-pointer px-4 py-3"
+              className={`text-sm uppercase tracking-[0.18em] cursor-pointer px-4 py-3 ${
+                isActive(pathname, link.target)
+                  ? "text-primary"
+                  : "text-navlink hover:text-white"
+              }`}
             >
               {link.name}
             </Link>
           </DropdownMenuItem>
         ))}
-        <DropdownMenuSeparator className="bg-white/10" />
-        <DropdownMenuItem asChild>
-          <Link
-            href="/contact#book-appointment"
-            className="mx-2 my-1 justify-center bg-white text-primary font-semibold text-sm py-2.5 rounded-full hover:bg-white/90 transition-colors cursor-pointer"
-          >
-            Book Appointment
-          </Link>
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

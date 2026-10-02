@@ -1,129 +1,75 @@
-import { Banner } from "@/components/shared/banner";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bolt } from "lucide-react";
-import { HomeHeroButtons } from "@/components/home-hero-buttons";
+import Image from "next/image";
+import Link from "next/link";
+import { getCollections } from "@/lib/ecom/client";
+import type { CollectionSummary } from "@/lib/ecom/types";
+import { GalleryCard } from "@/components/shared/gallery-card";
 
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
-export default function Home() {
+async function loadGalleries(): Promise<CollectionSummary[]> {
+  try {
+    const { collections } = await getCollections();
+    return collections;
+  } catch {
+    return [];
+  }
+}
+
+export default async function Home() {
+  const galleries = await loadGalleries();
+
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative flex h-[70vh] min-h-[480px] bg-[url('/office.jpg')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/40"></div>
-
-        <div className="relative w-full bg-linear-to-r from-black/40 via-black/20 to-transparent">
-          <div className="flex items-center h-full px-6">
-            <div className="flex flex-col text-background w-full max-w-7xl mx-auto">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
-                Care you <span className="text-subtext">can count on</span>
-              </h1>
-
-              <p className="mt-5 text-base md:text-lg text-white/85">
-                From same-day sick visits to long-term wellness plans, OneHealth
-                provides warm, personalized healthcare for every member of your
-                family — right here in Southern Utah.
-              </p>
-
-              <HomeHeroButtons />
-            </div>
-          </div>
+    <div className="w-full">
+      {/* ── Hero: one large image, framed like a print on the wall ── */}
+      <section className="max-w-6xl mx-auto px-4 md:px-6 pt-6 md:pt-10">
+        <div className="relative aspect-[4/5] sm:aspect-[16/10] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
+          <Image
+            src="/landing.jpg"
+            alt="Sunset over snow-dusted peaks above a winding mountain road"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1200px) 100vw, 1152px"
+          />
         </div>
       </section>
 
-      {/* Section BELOW hero */}
-      <section>
-        <Banner
-          className="text-sm lg:text-base bg-muted text-primary font-medium text-center py-3"
-          content="Dixie Primary Care is now OneHealth Clinics — same trusted team, expanded care."
-        />
+      {/* ── Intro ── */}
+      <section className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center flex flex-col items-center gap-6">
+        <h1 className="text-2xl md:text-3xl leading-snug">
+          Landscapes from the American Southwest and beyond
+        </h1>
+        <p className="text-base md:text-lg leading-relaxed text-foreground/80">
+          Welcome to the gallery of Grace Jeanne. Every photograph here is
+          available as a fine art print, made to bring the quiet of wild places
+          into your home or business.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4 pt-2">
+          <Link
+            href="/galleries"
+            className="border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-7 py-3 text-xs uppercase tracking-[0.22em] transition-colors"
+          >
+            View Galleries
+          </Link>
+          <Link
+            href="/shop"
+            className="border border-white/25 text-white/85 hover:border-white hover:text-white px-7 py-3 text-xs uppercase tracking-[0.22em] transition-colors"
+          >
+            Shop Prints
+          </Link>
+        </div>
       </section>
 
-      <div className="bg-white">
-        <section className="w-full py-24">
-          <div className="flex flex-col max-w-6xl mx-auto gap-6 px-6">
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest">
-              Est. 2006 · St. George, Utah
-            </p>
-            <h2 className="font-bold text-4xl md:text-5xl lg:text-6xl">
-              An Evolution of Care, Two Decades in the Making
-            </h2>
-            <div className="flex flex-col lg:flex-row gap-8 mt-2 text-muted-foreground text-lg">
-              <p>
-                Since 2006, our mission has been to provide a unique blend of
-                internal medicine and personalized attention. For 20 years,
-                we've had the privilege of being your medical home as Dixie
-                Primary Care. As our community grew, so did our scope. We've
-                evolved far beyond a traditional primary care office — managing
-                complex chronic conditions, performing specialized procedures,
-                and offering wellness care for every stage of life.
-              </p>
-            </div>
+      {/* ── Galleries ── */}
+      {galleries.length > 0 && (
+        <section className="max-w-6xl mx-auto px-4 md:px-6 pb-24">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16">
+            {galleries.map((gallery) => (
+              <GalleryCard key={gallery.id} gallery={gallery} />
+            ))}
           </div>
         </section>
-        <section className="bg-gray-50 w-full py-24">
-          <div className="flex flex-col max-w-6xl mx-auto gap-12 px-6">
-            <div className="w-full text-center">
-              <h2 className="text-sm font-semibold text-primary">
-                OUR PHILOSOPHY
-              </h2>
-              <h1 className="font-bold mt-4 text-4xl md:text-5xl lg:text-6xl">
-                Why OneHealth?
-              </h1>
-            </div>
-            <div className="flex flex-col md:flex-row justify-center items-center lg:items-stretch gap-8">
-              <Card className="flex-1 flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <CardHeader className="flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bolt className="text-primary" />
-                  </div>
-                  <CardTitle className="text-primary">
-                    All-in-one care
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Primary care, specialized wellness, and functional medicine
-                    — integrated in one place.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="flex-1 flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <CardHeader className="flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bolt className="text-primary" />
-                  </div>
-                  <CardTitle className="text-primary">
-                    Your medical home
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Primary care, specialized wellness, and functional medicine
-                    — integrated in one place.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="flex-1 flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <CardHeader className="flex flex-col gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bolt className="text-primary" />
-                  </div>
-                  <CardTitle className="text-primary">
-                    Built for growth
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Evolved to meet the complexity of modern health needs across
-                    every stage of life.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-      </div>
-    </>
+      )}
+    </div>
   );
 }

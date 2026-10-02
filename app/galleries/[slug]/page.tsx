@@ -54,37 +54,29 @@ export default async function GalleryPage({ params }: Props) {
 
   return (
     <div className="w-full">
-      {/* ── Hero ── */}
-      <section className="bg-hero-bg py-20 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col gap-6">
-          <Link
-            href="/galleries"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors w-fit"
-          >
-            <ArrowLeft size={14} /> All galleries
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-background">
-            {gallery.name}
-          </h1>
-          {gallery.description && (
-            <p className="max-w-2xl text-white/80 text-lg leading-relaxed whitespace-pre-line">
-              {gallery.description}
-            </p>
-          )}
-        </div>
-      </section>
+      <header className="max-w-3xl mx-auto px-6 pt-10 pb-12 md:pt-14 md:pb-16 text-center flex flex-col items-center gap-6">
+        <Link
+          href="/galleries"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-muted-foreground hover:text-primary transition-colors"
+        >
+          <ArrowLeft size={14} strokeWidth={1.5} /> All galleries
+        </Link>
+        <h1 className="text-3xl md:text-4xl">{gallery.name}</h1>
+        {gallery.description && (
+          <p className="text-base md:text-lg leading-relaxed text-foreground/80 whitespace-pre-line">
+            {gallery.description}
+          </p>
+        )}
+      </header>
 
-      {/* ── Photos ── */}
-      <section className="bg-white py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          {photos.length === 0 ? (
-            <p className="text-center py-24 text-gray-400 text-lg font-semibold">
-              No photos in this gallery yet
-            </p>
-          ) : (
-            <GalleryCarousel label={gallery.name} photos={photos} />
-          )}
-        </div>
+      <section className="max-w-6xl mx-auto px-4 md:px-14 pb-24">
+        {photos.length === 0 ? (
+          <p className="text-center py-24 text-muted-foreground">
+            No photos in this gallery yet
+          </p>
+        ) : (
+          <GalleryCarousel label={gallery.name} photos={photos} />
+        )}
       </section>
     </div>
   );

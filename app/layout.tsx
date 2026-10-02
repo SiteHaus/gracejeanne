@@ -1,18 +1,33 @@
 import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navigation/Navbar";
 import { NavbarLinkType } from "@/components/shared/navigation/NavbarLink";
-import type { Metadata } from "next";
-import { Funnel_Display } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Merriweather, Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const funnel_display = Funnel_Display({
+// Light serif for headings/captions, clean sans for body and nav —
+// the pairing fine-art print galleries tend to use.
+const displaySerif = Merriweather({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-geist-sans", // maps to what your globals.css expects
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  variable: "--font-display-serif",
+});
+
+const body = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-body",
 });
 
 const siteUrl = "https://gracejeanne.com";
+
+// Matches --background so mobile browser chrome and app previews blend in
+export const viewport: Viewport = {
+  themeColor: "#1c1916",
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -21,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Grace Jeanne",
   },
   description:
-    "Photgraphy in St. George, Utah. New patients always welcome. Call 435-668-3468.",
+    "Fine art landscape photography and prints by Grace Jeanne, based in St. George, Utah.",
   keywords: [
     "photography St. George Utah",
     "Grace Jeanne",
@@ -34,11 +49,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Grace Jeanne",
-    title: "Grace jeanne | Photography in St. George, Utah",
-    description: "Photography, collections, and more in St. George, Utah.",
+    title: "Grace Jeanne | Photography in St. George, Utah",
+    description: "Fine art photography and prints from St. George, Utah.",
     images: [
       {
-        url: "/office.jpg",
+        url: "/landing.jpg",
         width: 1200,
         height: 630,
         alt: "Photography in St. George, Utah",
@@ -67,26 +82,24 @@ export const metadata: Metadata = {
 };
 
 const mainLinks: NavbarLinkType[] = [
-  { name: "Home", target: "/" },
-  { name: "About Us", target: "/about" },
   { name: "Galleries", target: "/galleries" },
   { name: "Shop", target: "/shop" },
+  { name: "About", target: "/about" },
   { name: "Contact", target: "/contact" },
 ];
 
 // Static hardcoded object — no user input, no XSS risk
 const localBusinessSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Photography",
-  name: "Grace Jeanne",
+  "@type": "ProfessionalService",
+  name: "Grace Jeanne Photography",
+  description: "Fine art landscape photography and prints.",
   url: siteUrl,
-  telephone: "+1-435-688-0759",
+  image: `${siteUrl}/landing.jpg`,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "2433 East 3995 South",
     addressLocality: "St. George",
     addressRegion: "UT",
-    postalCode: "84790",
     addressCountry: "US",
   },
   areaServed: {
@@ -94,26 +107,6 @@ const localBusinessSchema = JSON.stringify({
     name: "St. George",
     sameAs: "https://en.wikipedia.org/wiki/St._George,_Utah",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 37.0965,
-    longitude: -113.5684,
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "08:00",
-      closes: "17:00",
-    },
-  ],
-  medicalSpecialty: [
-    "Family Medicine",
-    "Pediatrics",
-    "Dermatology",
-    "Women's Health",
-  ],
-  priceRange: "$$",
   sameAs: ["https://www.instagram.com/gracejeanne"],
 });
 
@@ -131,9 +124,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: localBusinessSchema }}
         />
       </head>
-      <body className={`${funnel_display.className} antialiased`}>
+      <body
+        className={`${displaySerif.variable} ${body.variable} font-sans antialiased min-h-screen flex flex-col`}
+      >
         <Navbar links={mainLinks} />
-        {children}
+        <main className="flex-1">{children}</main>
         <Footer />
         <Analytics />
       </body>
