@@ -8,6 +8,7 @@ import type {
   ProductDetail,
   ProductList,
 } from "./types";
+import { CATALOG_CACHE_TAG } from "./cache-tags";
 
 const DIRECT_API_URL = process.env.NEXT_PUBLIC_ECOM_API_URL;
 const STORE_SLUG = process.env.NEXT_PUBLIC_STORE_SLUG;
@@ -59,13 +60,13 @@ export async function getProducts(params?: {
   if (params?.offset) query.set("offset", String(params.offset));
   const qs = query.size ? `?${query}` : "";
   return ecomFetch<ProductList>(`/v1/catalog/products${qs}`, {
-    next: { revalidate: 60 },
+    next: { revalidate: 60, tags: [CATALOG_CACHE_TAG] },
   });
 }
 
 export async function getProduct(id: string): Promise<ProductDetail> {
   return ecomFetch<ProductDetail>(`/v1/catalog/products/${id}`, {
-    next: { revalidate: 60 },
+    next: { revalidate: 60, tags: [CATALOG_CACHE_TAG] },
   });
 }
 
@@ -73,14 +74,14 @@ export async function getProduct(id: string): Promise<ProductDetail> {
 
 export async function getCollections(): Promise<CollectionList> {
   return ecomFetch<CollectionList>("/v1/catalog/collections", {
-    next: { revalidate: 60 },
+    next: { revalidate: 60, tags: [CATALOG_CACHE_TAG] },
   });
 }
 
 export async function getCollection(slug: string): Promise<CollectionDetail> {
   return ecomFetch<CollectionDetail>(
     `/v1/catalog/collections/${encodeURIComponent(slug)}`,
-    { next: { revalidate: 60 } },
+    { next: { revalidate: 60, tags: [CATALOG_CACHE_TAG] } },
   );
 }
 
